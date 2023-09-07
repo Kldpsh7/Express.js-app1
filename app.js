@@ -1,15 +1,22 @@
 //const http = require('http')  express will do it internally
 const express = require('express')
+const bodyParser = require('body-parser')
 
 const app = express()
 
-app.use((req,res,next)=>{  //middleware
-    console.log('First Middleware')
-    next()                 //allows to go to next middleware
+app.use(bodyParser.urlencoded({extended:false}))
+
+app.use('/add-product',(req,res,next)=>{
+    res.send('<form action="/product" method="POST"><input type="text" name="name" placeholder="Item Name"><br><input type="number" name="size" placeholder="size"><br><button type="submit">ADD</button></form>')
 })
-app.use((req,res,next)=>{
-    console.log('Second Middleware')
-    res.send({key:'value'})
+
+app.post('/product',(req,res,next)=>{
+    console.log(req.body)
+    res.redirect('/')
+})
+
+app.use('/',(req,res,next)=>{
+    res.send('<h1>Welcome to express</h1>')
 })
 //const server = http.createServer(app)
 
