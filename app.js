@@ -12,8 +12,6 @@ app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/admin',adminRouter)
 app.use(shopRouter)
-app.use((req,res,next)=>{
-    res.status(404).sendFile(path.join(rootDir,'views','404.html'))
-})
+app.use()
 
 app.listen(4000)
