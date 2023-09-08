@@ -7,11 +7,12 @@ const app = express()
 app.use(bodyParser.urlencoded({extended:true}))
 const adminRouter = require('./routes/admin.js')
 const shopRouter = require('./routes/shop.js')
+const errorController = require('./controllers/errorController')
 
 app.use(express.static(path.join(__dirname,'public')))
 
 app.use('/admin',adminRouter)
 app.use(shopRouter)
-app.use()
+app.use(errorController.get404)
 
 app.listen(4000)
